@@ -102,7 +102,7 @@ The configuration is handled by a `.env` file which includes:
 The `.env` file is excluded from version control to protect sensitive information.
 
 ### Usage
-
+0. navigate to the urlShortenerServer folder.
 1. Install dependencies using `npm install`.
 2. Set up the `.env` file with the necessary environment variables.
 3. Run the server using `npm start`.
