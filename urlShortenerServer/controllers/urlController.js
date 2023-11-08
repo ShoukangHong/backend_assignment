@@ -5,62 +5,62 @@ const redirectDomain = process.env.REDIRECT_SERVER_DOMAIN || ("localhost:" + pro
 // All URL related controllers like createShortUrl, getUrls, redirectToLongUrl, etc.
 
 exports.createShortUrl = async (req, res) => {
-    const { longUrl, customShortUrl } = req.body;
-    
-    try {
-      // Check if the customShortUrl is provided and unique
-      if (customShortUrl) {
-        if (customShortUrl.length < 8){
-            return res.status(409).json({ message: 'Custom url too short.' });
-        }
-        const existingUrl = await Url.findOne({ shortUrl: customShortUrl });
-        if (existingUrl) {
-            return res.status(400).json({ message: 'Custom short URL already in use.' });
-        }
+  const { longUrl, customShortUrl } = req.body;
+
+  try {
+    // Check if the customShortUrl is provided and unique
+    if (customShortUrl) {
+      if (customShortUrl.length < 8) {
+        return res.status(409).json({ message: 'Custom url too short.' });
       }
-  
-      let shortUrl = customShortUrl;
-      if (!shortUrl) {
-        // Find the total count of URLs for determining the length of the random part
-        shortUrl = await generateUniqueShortUrl();
+      const existingUrl = await Url.findOne({ shortUrl: customShortUrl });
+      if (existingUrl) {
+        return res.status(400).json({ message: 'Custom short URL already in use.' });
       }
-  
-      let url = new Url({
-        _id: new mongoose.Types.ObjectId(),
-        longUrl,
-        shortUrl: shortUrl,
-        userId: req.user.userId
-      });
-  
-      url = await url.save();
-      url.shortUrl = redirectDomain + url.shortUrl;
-      res.status(201).json(url);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: error.toString()});
     }
-  };
+
+    let shortUrl = customShortUrl;
+    if (!shortUrl) {
+      // Find the total count of URLs for determining the length of the random part
+      shortUrl = await generateUniqueShortUrl();
+    }
+
+    let url = new Url({
+      _id: new mongoose.Types.ObjectId(),
+      longUrl,
+      shortUrl: shortUrl,
+      userId: req.user.userId
+    });
+
+    url = await url.save();
+    url.shortUrl = redirectDomain + url.shortUrl;
+    res.status(201).json(url);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+};
 
 exports.getUrlsByUser = async (req, res) => {
-    try {
-        const urls = await Url.find({ userId: req.user.userId });
-        res.json(urls);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error.toString()});
-    }
-  };
+  try {
+    const urls = await Url.find({ userId: req.user.userId });
+    res.json(urls);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+};
 
 exports.redirectToLongUrl = async (req, res) => {
-    try {
-      const url = await Url.findOne({ shortUrl: req.params.shortUrl });
-      if (url) {
-        res.redirect(url.longUrl);
-      } else {
-        res.status(404).json({ message: 'URL not found' });
-      }
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error });
+  try {
+    const url = await Url.findOne({ shortUrl: req.params.shortUrl });
+    if (url) {
+      res.redirect(url.longUrl);
+    } else {
+      res.status(404).json({ message: 'URL not found' });
     }
-  };
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};

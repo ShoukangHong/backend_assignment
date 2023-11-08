@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user');
-const urlRoutes = require('./routes/url');
+const userRoutes = require('./routes/userRoute');
+const urlRoutes = require('./routes/urlRoute');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));

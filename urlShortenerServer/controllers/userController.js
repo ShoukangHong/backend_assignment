@@ -23,7 +23,7 @@ exports.signup = async (req, res) => {
     res.status(201).json({ "userId": user._id, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error.toString()});
+    res.status(500).json({ error: error.toString() });
   }
 };
 
@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error.toString()});
+    res.status(500).json({ error: error.toString() });
   }
 };
 
@@ -62,6 +62,6 @@ exports.updateTier = async (req, res) => {
     res.json({ message: 'Tier updated successfully', newTier: user.tier });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error.toString()});
+    res.status(500).json({ error: error.toString() });
   }
 };
