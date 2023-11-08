@@ -63,7 +63,7 @@ The `User` Schema maintains user-specific data. Its fields include:
 
 #### Database efficiency
 
-This modeling of data is optimized for efficiency all database operations except retrieving a user's URL history are executed with O(1) time complexity,
+This modeling of data is optimized for efficiency. All database operations except retrieving a user's URL history are executed with O(1) time complexity.
 
 ### Core Functionalities
 
