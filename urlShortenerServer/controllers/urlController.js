@@ -1,7 +1,7 @@
 const Url = require('../models/Url');
 const mongoose = require('mongoose');
 const generateUniqueShortUrl = require('../helpers/generateUniqueShortUrl');
-const redirectDomain = process.env.SERVER_DOMAIN || ("localhost:" + process.env.PORT + "/url/");
+const redirectDomain = process.env.REDIRECT_SERVER_DOMAIN || ("localhost:" + process.env.PORT + "/r/");
 // All URL related controllers like createShortUrl, getUrls, redirectToLongUrl, etc.
 
 exports.createShortUrl = async (req, res) => {
@@ -11,11 +11,11 @@ exports.createShortUrl = async (req, res) => {
       // Check if the customShortUrl is provided and unique
       if (customShortUrl) {
         if (customShortUrl.length < 8){
-            return res.status(409).json({ message: 'Custom short URL already in use.' });
+            return res.status(409).json({ message: 'Custom url too short.' });
         }
         const existingUrl = await Url.findOne({ shortUrl: customShortUrl });
         if (existingUrl) {
-            return res.status(400).json({ message: 'Custom url too short' });
+            return res.status(400).json({ message: 'Custom short URL already in use.' });
         }
       }
   
