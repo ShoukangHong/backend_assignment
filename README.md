@@ -8,14 +8,13 @@ This document outlines the implementation approach for a URL shortener service b
 
 ### Tech Stack
 
-- **Node.js**
-- **Express.js**
-- **MongoDB**
-- **Express.js**
-- **Mongoose**
-- **jsonwebtoken**
-- **bcrypt**
-- **dotenv**
+- **Node.js** - The runtime environment for running the server-side JavaScript code.
+- **Express.js**  - The web application framework for creating API endpoints.
+- **MongoDB** - The NoSQL database for storing user and URL data.
+- **Mongoose** - The Object Data Modeling (ODM) library for MongoDB and Node.js.
+- **jsonwebtoken** - The library for generating and verifying JSON Web Tokens (JWT) for user authentication.
+- **bcrypt** - The library for hashing passwords.
+- **dotenv** - The library for loading environment variables from `.env` files.
 
 ### Project Structure
 
