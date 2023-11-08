@@ -10,8 +10,12 @@ This document outlines the implementation approach for a URL shortener service b
 
 - **Node.js**
 - **Express.js**
-- **Mongoose**
 - **MongoDB**
+- **Express.js**
+- **Mongoose**
+- **jsonwebtoken**
+- **bcrypt**
+- **dotenv**
 
 ### Project Structure
 
